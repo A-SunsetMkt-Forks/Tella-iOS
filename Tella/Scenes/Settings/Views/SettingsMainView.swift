@@ -11,10 +11,18 @@ struct SettingsMainView: View {
     
     @ObservedObject var appModel : MainAppModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var settingsViewModel : SettingsViewModel
+    
+    init(appModel:MainAppModel) {
+        _settingsViewModel = StateObject(wrappedValue: SettingsViewModel(appModel: appModel))
+        self.appModel = appModel
+    }
+    
     var body: some View {
         ContainerView {
             VStack() {
-                GenaralSettingsView(appModel: appModel)
+                GeneralSettingsView(appModel: appModel)
+                    .environmentObject(settingsViewModel)
                 RecentFilesSettingsView()
                 Spacer()
             }
@@ -37,13 +45,14 @@ struct SettingsMainView: View {
     }
 }
 
-struct GenaralSettingsView : View {
+struct GeneralSettingsView : View {
     
     @State private var presentingLanguage = false
     @ObservedObject var appModel : MainAppModel
     @StateObject var lockViewModel = LockViewModel(unlockType: .update)
     @State var passwordTypeString : String = ""
-    
+    @EnvironmentObject private var sheetManager: SheetManager
+    @EnvironmentObject var settingsViewModel: SettingsViewModel
     
     var body : some View {
         
@@ -52,9 +61,9 @@ struct GenaralSettingsView : View {
             SettingsItemView(imageName: "settings.language",
                              title: Localizable.Settings.settLanguage,
                              value: Language.currentLanguage.name)
-                .onTapGesture {
-                    presentingLanguage = true
-                }
+            .onTapGesture {
+                presentingLanguage = true
+            }
             
             DividerView()
             
@@ -62,14 +71,25 @@ struct GenaralSettingsView : View {
                              title: Localizable.Settings.settLock,
                              value: passwordTypeString)
             
-                .navigateTo(destination: unlockView)
+            .navigateTo(destination: unlockView)
+            
+            
+            DividerView()
+            
+            SettingsItemView(imageName: "settings.timeout",
+                             title: "Lock timeout",
+                             value: appModel.settings.lockTimeout.displayName)
+            .onTapGesture {
+                showLockTimeout()
+            }
             
             DividerView()
             
             SettingsItemView(imageName: "settings.help",
                              title: Localizable.Settings.settAbout,
                              value: "")
-                .navigateTo(destination: AboutAndHelpView())
+            .navigateTo(destination: AboutAndHelpView()
+                .environmentObject(settingsViewModel))
             
         }.background(Color.white.opacity(0.08))
             .cornerRadius(15)
@@ -101,6 +121,12 @@ struct GenaralSettingsView : View {
         
     }
     
+    func showLockTimeout() {
+        sheetManager.showBottomSheet(modalHeight: 408) {
+            LockTimeoutView()
+                .environmentObject(settingsViewModel)
+        }
+    }
 }
 
 struct RecentFilesSettingsView : View {

@@ -7,8 +7,8 @@ import SwiftUI
 struct LanguageListView: View {
     
     @Binding var isPresented : Bool
-    @StateObject var settingsViewModel = SettingsViewModel()
-    
+    @EnvironmentObject var settingsViewModel : SettingsViewModel
+
     var body: some View {
         ContainerView {
             
