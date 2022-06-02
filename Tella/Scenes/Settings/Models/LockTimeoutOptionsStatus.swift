@@ -6,10 +6,10 @@
 import Foundation
 
 
-class LockTimeoutOptionsStatus :Hashable{
+class LockTimeoutOptionsStatus :Hashable {
     
     var lockTimeoutOption :  LockTimeoutOption
-    var isSelected :  Bool
+    @Published var isSelected :  Bool
     
     init(lockTimeoutOption :  LockTimeoutOption, isSelected :  Bool) {
         self.lockTimeoutOption = lockTimeoutOption

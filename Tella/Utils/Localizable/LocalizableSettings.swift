@@ -21,5 +21,16 @@ extension Localizable {
         static var settAboutSubhead = "Settings_SettAbout_Subhead".localized
         static var settAboutContactUs = "Settings_SettAbout_ContactUs".localized
         static var settAboutPrivacyPolicy = "Settings_SettAbout_PrivacyPolicy".localized
+
+        static var settLockTimeout = "Settings_Sett_LockTimeout".localized
+        static var settLockTimeoutSheetTitle = "Settings_SettLockTimeout_SheetTitle".localized
+        static var settLockTimeoutSheetExpl = "Settings_SettLockTimeout_SheetExpl".localized
+        static var settLockTimeoutImmediatelySheetSelect = "Settings_SettLockTimeout_Immediately_SheetSelect".localized
+        static var settLockTimeoutOneminuteSheetSelect = "Settings_SettLockTimeout_Oneminute_SheetSelect".localized
+        static var settLockTimeoutFiveMinutesSheetSelect = "Settings_SettLockTimeout_FiveMinutes_SheetSelect".localized
+        static var settLockTimeoutThirtyMinutesSheetSelect = "Settings_SettLockTimeout_ThirtyMinutes_SheetSelect".localized
+        static var settLockTimeoutOneHourSheetSelect = "Settings_SettLockTimeout_OneHour_SheetSelect".localized
+        static var settLockTimeoutCancelSheetAction = "Settings_SettLockTimeout_Cancel_SheetAction".localized
+        static var settLockTimeoutSaveSheetAction = "Settings_SettLockTimeout_Save_SheetAction".localized
     }
 }

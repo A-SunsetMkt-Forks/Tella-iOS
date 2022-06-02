@@ -36,7 +36,7 @@ struct TitleView : View {
     
     var body: some View {
         
-        Text("Lock timeout")
+        Text(Localizable.Settings.settLockTimeoutSheetTitle)
             .font(.custom(Styles.Fonts.boldFontName, size: 16))
             .multilineTextAlignment(.leading)
             .foregroundColor(.white)
@@ -44,7 +44,7 @@ struct TitleView : View {
         Spacer()
             .frame(height: 10)
         
-        Text("Decide how long it takes for Tella to lock.")
+        Text(Localizable.Settings.settLockTimeoutSheetExpl)
             .font(.custom(Styles.Fonts.regularFontName, size: 14))
             .multilineTextAlignment(.leading)
             .foregroundColor(.white)
@@ -60,12 +60,12 @@ struct LockTimeoutOptionsView : View {
         
         VStack(alignment: .leading, spacing: 30) {
             
-            ForEach(settingsViewModel.lockTimeoutOptions, id:\.self) { item in
+            ForEach(0..<settingsViewModel.lockTimeoutOptions.count, id:\.self) { index in
                 
                 Button {
-                    settingsViewModel.selectedLockTimeoutOption = item.lockTimeoutOption
+                    settingsViewModel.selectedLockTimeoutOption = settingsViewModel.lockTimeoutOptions[index].lockTimeoutOption
                 } label: {
-                    LockTimeoutOptionView(lockTimeoutOption: item)
+                    LockTimeoutOptionView(index: index)
                 }
             }
         }
@@ -74,17 +74,19 @@ struct LockTimeoutOptionsView : View {
 
 struct LockTimeoutOptionView : View {
     
-    var lockTimeoutOption: LockTimeoutOptionsStatus
-    
+    var index: Int
+    @EnvironmentObject var settingsViewModel : SettingsViewModel
+
     var body: some View {
         HStack(spacing: 15) {
             
-            lockTimeoutOption.isSelected ? Image("radio_selected") : Image("radio_unselected")
+            settingsViewModel.lockTimeoutOptions[index].isSelected ? Image("radio_selected") : Image("radio_unselected")
             
-            Text(lockTimeoutOption.lockTimeoutOption.displayName)
+            Text(settingsViewModel.lockTimeoutOptions[index].lockTimeoutOption.displayName)
                 .font(.custom(Styles.Fonts.regularFontName, size: 14))
                 .foregroundColor(.white)
                 .multilineTextAlignment(.leading)
+            
             Spacer()
         }
     }
@@ -103,7 +105,7 @@ struct BottomButtonsView : View {
             Button {
                 sheetManager.hide()
             } label: {
-                Text("CANCEL")
+                Text(Localizable.Settings.settLockTimeoutCancelSheetAction)
                     .font(.custom(Styles.Fonts.semiBoldFontName, size: 14))
                     .foregroundColor(.white)
             }.padding()
@@ -112,7 +114,7 @@ struct BottomButtonsView : View {
                 settingsViewModel.saveLockTimeout()
                 sheetManager.hide()
             } label: {
-                Text("SAVE")
+                Text(Localizable.Settings.settLockTimeoutSaveSheetAction)
                     .font(.custom(Styles.Fonts.semiBoldFontName, size: 14))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.trailing)
