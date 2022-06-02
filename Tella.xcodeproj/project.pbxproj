@@ -2023,7 +2023,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.7.4;
-				PRODUCT_BUNDLE_IDENTIFIER = org.wearehorizontal.tella;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.hzontal.tella-internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -2050,9 +2050,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.7.4;
-				PRODUCT_BUNDLE_IDENTIFIER = org.wearehorizontal.tella;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.hzontal.tella-internal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Tella (AppStore)";
+				PROVISIONING_PROFILE_SPECIFIER = "Tella-Internal (AppStore)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
